@@ -29,32 +29,49 @@ public class App {
         series[0].entregar();
         series[4].entregar();
 
-        logger.log(Level.INFO, "Número de Series Entregadas: {0}", countSeriesEntregadas(series));
-        logger.log(Level.INFO, "Número de Videojuegos Entregados: {0}", countVideojuegosEntregados(videojuegos));
+        logger.log(Level.INFO, "Número de Series Entregadas: {0}", countSeriesEntregadas(series).length);
+        logger.log(Level.INFO, "Las Series son: {0}", countSeriesEntregadas(series));
+        logger.log(Level.INFO, "Número de Videojuegos Entregados: {0}", countVideojuegosEntregados(videojuegos).length);
+        logger.log(Level.INFO, "Los Videojuegos son: {0}", countVideojuegosEntregados(videojuegos));
 
         logger.log(Level.INFO, "El Videojuego con más horas estimadas es: {0}", maxHorasVideojuegos(videojuegos));
         logger.log(Level.INFO, "La Serie con más Temporadas es: {0}", maxTemporadasSeries(series));
 
     }
 
-    private static Integer countSeriesEntregadas(Serie[] series){
+    private static Serie[] countSeriesEntregadas(Serie[] series){
         Integer count = 0;
         for (Serie serie : series){
             if (Boolean.TRUE.equals(serie.isEntregado())){
                 count++;
             }
         }
-        return count;
+        Serie[] seriesEntregadas = new Serie[count];
+        Integer i = 0;
+        for (Serie serie : series){
+            if (Boolean.TRUE.equals(serie.isEntregado())){
+                seriesEntregadas[i] = serie;
+            }
+        }
+        return seriesEntregadas;
     }
 
-    private static Integer countVideojuegosEntregados(Videojuego[] videojuegos){
+    private static Videojuego[] countVideojuegosEntregados(Videojuego[] videojuegos){
         Integer count = 0;
         for (Videojuego videojuego : videojuegos){
             if (Boolean.TRUE.equals(videojuego.isEntregado())){
                 count++;
             }
         }
-        return count;
+
+        Videojuego[] videojuegosEntregados = new Videojuego[count];
+        Integer i = 0;
+        for (Videojuego videojuego : videojuegos){
+            if (Boolean.TRUE.equals(videojuego.isEntregado())){
+                videojuegosEntregados[i] = videojuego;
+            }
+        }
+        return videojuegosEntregados;
     }
 
     private static Videojuego maxHorasVideojuegos(Videojuego[] videojuegos){
